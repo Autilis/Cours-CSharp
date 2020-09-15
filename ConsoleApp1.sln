@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP1", "TP1\TP1.csproj", "{D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TPs", "TPs", "{ACE3B753-9C57-47DB-9CA0-27C58F1AF849}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP-Mod3", "TP-Mod3\TP-Mod3.csproj", "{A6FDE93D-9C83-4EC1-9851-8DD0EFA54AE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +37,17 @@ Global
 		{D792D68B-58BC-4549-B9AE-9E7698EA15E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D792D68B-58BC-4549-B9AE-9E7698EA15E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D792D68B-58BC-4549-B9AE-9E7698EA15E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6FDE93D-9C83-4EC1-9851-8DD0EFA54AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FDE93D-9C83-4EC1-9851-8DD0EFA54AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FDE93D-9C83-4EC1-9851-8DD0EFA54AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FDE93D-9C83-4EC1-9851-8DD0EFA54AE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D792D68B-58BC-4549-B9AE-9E7698EA15E8} = {ACE3B753-9C57-47DB-9CA0-27C58F1AF849}
+		{A6FDE93D-9C83-4EC1-9851-8DD0EFA54AE3} = {ACE3B753-9C57-47DB-9CA0-27C58F1AF849}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {783059A9-EE64-486F-9B88-4D3C5B3E5913}
