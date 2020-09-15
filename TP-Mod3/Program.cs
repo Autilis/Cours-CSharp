@@ -63,8 +63,8 @@ namespace TP_Mod3
             //◦ Afficher combien ont gagné les auteurs en moyenne(moyenne des factures)
             //var t5 = ListeAuteurs.Select(x => x.Factures);
             //Console.WriteLine("Moyenne des factures : " + t5.ToString);
-            var avgFact = ListeAuteurs.Average(a => a.Factures);
-            Console.WriteLine("avgFact : " + avgFact);
+            //var avgFact = ListeAuteurs.Average(a => a.Factures);
+            //Console.WriteLine("avgFact : " + avgFact);
 
             //◦ Afficher les auteurs et la liste de leurs livres
             //◦ Afficher les titres de tous les livres triés par ordre alphabétique
