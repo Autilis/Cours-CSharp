@@ -23,7 +23,7 @@ namespace TP5.Controllers
         {
             Chat chats = FakeDb.Instance.ListeChat.Where(x => x.Id == id).FirstOrDefault();
 
-            return View();
+            return View(chats);
         }
 
         // GET: Chat/Delete/5
