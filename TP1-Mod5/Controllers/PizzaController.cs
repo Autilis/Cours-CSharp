@@ -26,7 +26,10 @@ namespace TP1_Mod5.Controllers
         // GET: Pizza/Create
         public ActionResult Create()
         {
-            return View();
+            //List<Ingredient> IngredientsDisponibles = FakeDb.Instance.IngredientsDisponibles;
+            List<Pate> PatesDisponibles = FakeDb.Instance.PatesDisponibles;
+
+            return View(PatesDisponibles);
         }
 
         // POST: Pizza/Create
