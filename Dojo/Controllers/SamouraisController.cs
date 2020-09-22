@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BODojo;
 using Dojo.Data;
+using Dojo.Models;
 
 namespace Dojo.Controllers
 {
@@ -39,7 +40,12 @@ namespace Dojo.Controllers
         // GET: Samourais/Create
         public ActionResult Create()
         {
-            return View();
+
+            VModelSamourai vm = new VModelSamourai();
+
+            vm.ArmesList = db.Armes.ToList();
+
+            return View(vm);
         }
 
         // POST: Samourais/Create
@@ -47,31 +53,38 @@ namespace Dojo.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Force,Nom")] Samourai samourai)
+        public ActionResult Create(VModelSamourai vm)
         {
             if (ModelState.IsValid)
-            {
-                db.Samourais.Add(samourai);
+            { 
+                vm.Samourai.Arme = db.Armes.Find(vm.ArmeId);
+                db.Samourais.Add(vm.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(samourai);
+            return View(vm);
         }
 
         // GET: Samourais/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            VModelSamourai vm = new VModelSamourai();
+            vm.ArmesList      = db.Armes.ToList();
+            vm.Samourai       = db.Samourais.Find(id);
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Samourai samourai = db.Samourais.Find(id);
-            if (samourai == null)
+
+            if (vm.Samourai == null)
             {
                 return HttpNotFound();
             }
-            return View(samourai);
+
+            return View(vm);
         }
 
         // POST: Samourais/Edit/5
@@ -79,15 +92,17 @@ namespace Dojo.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Force,Nom")] Samourai samourai)
+        public ActionResult Edit(VModelSamourai vm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(samourai).State = EntityState.Modified;
+                vm.Samourai.Arme = db.Armes.Find(vm.ArmeId);
+
+                db.Entry(vm.Samourai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(samourai);
+            return View(vm);
         }
 
         // GET: Samourais/Delete/5
