@@ -42,7 +42,13 @@ namespace TPModule6_1.Controllers
         public ActionResult Create()
         {
             SamouraiViewModel vm = new SamouraiViewModel();
-            vm.Armes = db.Armes.ToList();
+            
+            var armes = db.Armes.ToList();
+            var rejet = armes.Where(i => db.Samourais.Select(x => x.Arme.Id).Contains(i.Id));
+            var dispo = armes.Except(rejet);
+
+            vm.Armes = dispo.ToList();
+            vm.ArtMartiales = db.ArtMartials.ToList();
             return View(vm);
         }
 
@@ -58,6 +64,12 @@ namespace TPModule6_1.Controllers
                 if (vm.IdSelectedArme != null)
                 {
                     vm.Samourai.Arme = db.Armes.Find(vm.IdSelectedArme);
+                }
+                
+                if (vm.IdsSelectArtMartial.Count > 0)
+                {
+                    //vm.Samourai.Arme = db.Armes.Find(vm.IdSelectedArme);
+                    vm.Samourai.ArtMartials = db.ArtMartials.Where(i => vm.IdsSelectArtMartial.Contains(i.Id)).ToList();
                 }
                 
                 db.Samourais.Add(vm.Samourai);
@@ -78,14 +90,23 @@ namespace TPModule6_1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             SamouraiViewModel vm = new SamouraiViewModel();
+
+            var armes = db.Armes.ToList();
+            var rejet = armes.Where(i => db.Samourais.Where(s => s.Id != id).Select(x => x.Arme.Id).Contains(i.Id));
+            var dispo = armes.Except(rejet);
+
             //vm.Samourai = db.Samourais.Include(x => x.Arme).FirstOrDefault(x => x.Id == id);
+
+            vm.ArtMartiales = db.ArtMartials.ToList();
+            //vm.ArtMartiales = db.Samourais.Where(s => s.Id == id).SelectMany(x => x.ArtMartials).ToList();
             vm.Samourai = db.Samourais.Find(id);
             if (vm.Samourai == null)
             {
                 return HttpNotFound();
             }
 
-            vm.Armes = db.Armes.ToList();
+            //vm.Armes = db.Armes.ToList();
+            vm.Armes = dispo.ToList(); 
             if (vm.Samourai.Arme != null)
             {
                 vm.IdSelectedArme = vm.Samourai.Arme.Id;
@@ -116,6 +137,16 @@ namespace TPModule6_1.Controllers
                 else
                 {
                     currentSamourai.Arme = null;
+                }
+
+                if (vm.IdsSelectArtMartial.Count > 0)
+                {
+                    //vm.Samourai.ArtMartials = db.ArtMartials.Where(i => vm.IdsSelectArtMartial.Contains(i.Id)).ToList();
+                    currentSamourai.ArtMartials = db.ArtMartials.Where(x => vm.IdsSelectArtMartial.Contains(x.Id)).ToList();
+                }
+                else
+                {
+                    currentSamourai.ArtMartials = null;
                 }
 
                 db.Entry(currentSamourai).State = EntityState.Modified;
